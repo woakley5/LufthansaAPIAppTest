@@ -28,8 +28,6 @@ class ViewController: UIViewController {
         view.addSubview(image)
     }
     
-    
-    
     func animateImage(){
         UIView.animate(withDuration: 4, animations: {
             self.image.frame = CGRect(x: self.view.frame.maxX + 300, y: 400, width: 300, height: 200)
@@ -49,9 +47,5 @@ class ViewController: UIViewController {
             }
         }
     }
-    
-    
-
-
 }
 
