@@ -41,11 +41,11 @@ class LufthansaAPIHelper {
         }
     }
     
-    //This function will get the status for a flight. Input format "LHXXX"
-    static func getFlightStatus(flightNum: String, completion: @escaping (Flight) -> ()){
+    //This function will get the status for a flight. FlightNum format "LHXXX" Date format "YYYY-MM-DD"
+    static func getFlightStatus(flightNum: String, date: String, completion: @escaping (Flight) -> ()){
         
         //Request URL and authentication parameters
-        let requestURL = "https://api.lufthansa.com/v1/operations/flightstatus/\(flightNum)/2018-09-14"
+        let requestURL = "https://api.lufthansa.com/v1/operations/flightstatus/\(flightNum)/\(date)"
         let parameters: HTTPHeaders = ["Authorization": "Bearer \(authToken!)", "Accept": "application/json"]
         
         print("PARAMETERS FOR REQUEST:")
@@ -65,7 +65,7 @@ class LufthansaAPIHelper {
             let flight = Flight()
             flight.flightNumber = flightNum
             flight.status = json["FlightStatusResource"]["Flights"]["Flight"]["FlightStatus"]["Definition"].stringValue
-            
+            flight.arrivalAirport = json["FlightStatusResource"]["Flights"]["Flight"]["Arrival"]["AirportCode"].stringValue
             completion(flight)
         }
     }

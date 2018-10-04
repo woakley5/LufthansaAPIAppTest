@@ -40,9 +40,9 @@ class ViewController: UIViewController {
         
         //Gets new auth token and then gets flight status once that is successful
         LufthansaAPIHelper.getAuthToken() {
-            LufthansaAPIHelper.getFlightStatus(flightNum: "LH001") { flt in
+            LufthansaAPIHelper.getFlightStatus(flightNum: "LH001", date: "2018-10-04") { flt in
                 print(flt.status!)
-                self.label.text = flt.status!
+                self.label.text = flt.status! + " at " + flt.arrivalAirport!
                 self.animateImage()
             }
         }
